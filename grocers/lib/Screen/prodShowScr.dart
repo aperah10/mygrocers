@@ -314,7 +314,7 @@ class _CheckProd2State extends State<CheckProd2> {
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Btn(
-          width: 100,
+          width: 50,
           padding: EdgeInsets.all(3),
 
           btnName: 'ADD',

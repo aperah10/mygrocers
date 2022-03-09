@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocers/Screen/helpScr.dart';
+import 'package:grocers/Screen/login.dart';
+import 'package:grocers/Screen/orderScr.dart';
 import 'package:grocers/utils/common.dart';
 import 'package:grocers/utils/style.dart';
 
@@ -28,26 +30,26 @@ class _DrawerScreenState extends State<DrawerScreen> {
       CusDrawerList(
         title: 'Dashboard',
         icon: Icons.speed,
-        // submitMethod: LoginScr(),
+        submitMethod: LoginScr(),
       ),
       CusDrawerList(title: 'My Account', icon: Icons.person),
       CusDrawerList(
         title: 'Your Orders',
         icon: Icons.shopping_bag,
+        submitMethod: OrderScreen(),
       ),
       CusDrawerList(
         title: 'Wishlist',
         icon: Icons.favorite_border,
-        // submitMethod: WishListScreen(),
+        submitMethod: WishListScreen(),
       ),
       CusDrawerList(title: 'Manage Address', icon: Icons.location_on),
       CusDrawerList(title: 'Payment ', icon: Icons.payment),
       CusDrawerList(title: 'Offers', icon: Icons.pages),
       CusDrawerList(
-        title: 'Notifictions',
-        icon: Icons.payment,
-        // submitMethod: NotificationScreen()
-      ),
+          title: 'Notifictions',
+          icon: Icons.payment,
+          submitMethod: NotificationScreen()),
       CusDrawerList(
         title: 'FAQs',
         icon: Icons.translate,

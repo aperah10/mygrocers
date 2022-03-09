@@ -8,6 +8,7 @@ import '../Elements/all_list_content.dart';
 import '../common/button.dart';
 import '../common/formfield.dart';
 import '../utils/style.dart';
+import 'orderDetScr.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -56,7 +57,9 @@ class _CartScreenState extends State<CartScreen> {
                 // fullPrice: fullPrice,
                 // quantity: quantity,
                 ),
+            Divider(),
             CartContentFooter(),
+            Divider(),
             CartPriceList()
           ],
         ),
@@ -70,6 +73,7 @@ class _CartScreenState extends State<CartScreen> {
           btnName: 'PROCEED TO PAYMENT',
           txtColor: offWhiteColor,
           color: Colors.green,
+          onTap: () => navigationPush(context, OrderDeatilsScreen()),
         ),
       ),
     );
@@ -225,8 +229,11 @@ class CartContentFooter extends StatelessWidget {
           txt(
               t: 'Delivery Location',
               icon: Icons.edit,
-              child: AddressPart(
-                trailing: IconBtn(icon: null),
+              child: Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: AddressPart(
+                  trailing: IconBtn(icon: null),
+                ),
               )),
         ],
       ),
@@ -252,6 +259,7 @@ class CartContentFooter extends StatelessWidget {
                     ),
                     IconBtn(
                         icon: icon ?? null,
+                        size: 20,
                         color: Color.fromARGB(255, 102, 161, 104),
                         onPressed: () {
                           print('update');

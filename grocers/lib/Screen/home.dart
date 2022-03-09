@@ -116,7 +116,7 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
         actionList: [
           IconBtn(
-            // onPressed: () => navigationPush(context, NotificationScreen()),
+            onPressed: () => navigationPush(context, NotificationScreen()),
             icon: Icons.notifications,
             size: 20,
             color: offWhiteColor,
@@ -130,15 +130,18 @@ class HomeScreen extends StatelessWidget {
           // shrinkWrap: true,
           children: [
             heightSizedBox(5.0),
-            // Stack(
-            //   children: [
-            //     AddressPart(),
-            //     Padding(
-            //       padding: const EdgeInsets.only(top: 70.0),
-            //       child: SearchPart(),
-            //     ),
-            //   ],
-            // ),
+            Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: AddressPart(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 43.0),
+                  child: SearchPart(),
+                ),
+              ],
+            ),
             ListView(shrinkWrap: true, children: [
               heightSizedBox(20.0),
               ImgSlider(),
@@ -162,7 +165,7 @@ class SearchPart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        left: 15.0,
+        left: 10.0,
         right: 15.0,
       ),
       child: Container(
@@ -202,14 +205,7 @@ class AddressPart extends StatelessWidget {
       //   borderRadius: BorderRadius.circular(5),
       // ),
       // padding: EdgeInsets.all(0),
-      child: ListTile(
-        minVerticalPadding: 0.0,
-        // contentPadding: EdgeInsets.symmetric(vertical: 0.0),
-        leading: ImgIcon(
-          src: 'assets/icons/location-icon.png',
-          width: 30,
-          height: 30,
-        ),
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         // Container(
         //   color: Color.fromARGB(255, 152, 166, 45),
         //   padding: EdgeInsets.all(.3),
@@ -219,13 +215,35 @@ class AddressPart extends StatelessWidget {
         //     icon: Icons.location_on_outlined,
         //   ),
         // ),
-        title: Txt(
-          t: 'Your Location',
-          fontSize: 13,
+
+        Row(
+          children: [
+            ImgIcon(
+              src: 'assets/icons/location-icon.png',
+              width: 30,
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Txt(
+                    t: 'Your Location',
+                    fontSize: 13,
+                  ),
+                  Txt(t: '48,2nd floor ,jagatpura,Jaipur'),
+                ],
+              ),
+            ),
+          ],
         ),
-        subtitle: Txt(t: '48,2nd floor ,jagatpura,Jaipur'),
-        trailing: trailing ?? IconBtn(icon: Icons.chevron_right),
-      ),
+        Container(
+            alignment: Alignment.topRight,
+            child:
+                trailing != null ? IconBtn(icon: Icons.chevron_right) : null),
+      ]),
     );
   }
 }

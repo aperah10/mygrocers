@@ -420,7 +420,7 @@ class CartProdVerList extends StatelessWidget {
             // quantity: quantity,
           );
         },
-        itemCount: 5,
+        itemCount: 3,
       ),
     );
   }

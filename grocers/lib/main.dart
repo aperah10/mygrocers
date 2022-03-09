@@ -20,15 +20,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Grocery App',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        // home: SplashScreen(),
-        // home: OrderScreen(),
-        // home: HomeScreen(),
-        // home: WelcomeScr()
-        home: HelpScreen());
+      title: 'Grocery App',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: SplashScreen(),
+      // home: OrderScreen(),
+      // home: OrderDeatilsScreen()
+      // home: HomeScreen(),
+      // home: WelcomeScr()
+      // home: HelpScreen()
+    );
   }
 }

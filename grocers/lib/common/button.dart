@@ -120,7 +120,7 @@ class IconBtn extends StatelessWidget {
         icon,
         color: color2,
       ),
-      iconSize: size!,
+      iconSize: size ?? 20,
       color: color,
     );
   }

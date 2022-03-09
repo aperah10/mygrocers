@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocers/Elements/baseAppbar.dart';
+import 'package:grocers/Screen/cartScr.dart';
 import 'package:grocers/common/button.dart';
 import 'package:grocers/scrpart/imgslider.dart';
 import 'package:grocers/utils/common.dart';
@@ -99,6 +100,7 @@ class _ProductDetailScrState extends State<ProductDetailScr> {
           btnName: 'Add to Cart',
           txtColor: offWhiteColor,
           color: Colors.green,
+          onTap: () => navigationPush(context, CartScreen()),
         ),
       ),
       // bottomNavigationBar: Padding(
