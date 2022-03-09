@@ -162,12 +162,10 @@ class ProdLastContent extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: Btn(
               padding: EdgeInsets.all(3),
-
               onTap: btnOnTap,
               btnName: 'MOVE INTO BAG',
-              style: TextStyle(color: offWhiteColor, fontSize: 10),
-              // txtColor: offWhiteColor,
-              color: Colors.green,
+              style: TextStyle(color: txtWhiteColor, fontSize: 10),
+              color: offgreenColor,
             ),
           ),
         ],

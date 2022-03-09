@@ -36,7 +36,7 @@ class AuthOptionScr extends StatelessWidget {
                     width: double.maxFinite,
                     height: 40,
                     btnName: 'LOGIN AS A CUSTOMER',
-                    color: bottomSheet,
+                    color: marronColor,
                   ),
                   heightSizedBox(25.0),
                   Btn(
@@ -82,12 +82,12 @@ class WelcomeTxt extends StatelessWidget {
         Txt(
           t: title ?? 'Hello, Good Day ! ',
           fontSize: fontSize1 ?? 17,
-          color: color1 ?? offWhiteColor,
+          color: color1 ?? txtWhiteColor,
         ),
         Txt(
           t: msg ?? 'descrition..........................................',
           fontSize: fontSize2 ?? 15,
-          color: color2 ?? offWhiteColor,
+          color: color2 ?? txtWhiteColor,
         ),
       ],
     );

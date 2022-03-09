@@ -169,7 +169,7 @@ class OrderItemStatus extends StatelessWidget {
         height: 25,
         width: 80,
         btnName: 'TrackOrder',
-        txtColor: offWhiteColor,
+        txtColor: txtWhiteColor,
         color: Colors.green,
       ),
     );

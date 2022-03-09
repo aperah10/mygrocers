@@ -15,6 +15,7 @@ class EditTextField extends StatelessWidget {
 
   final Function(String)? onChanged;
   final int? maxLines;
+  final int? minLines;
   final int? maxLength;
   final String? initialValue;
   final Function(String?)? onSaved;
@@ -25,6 +26,9 @@ class EditTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final String? hintText;
   final TextAlign? textAlign;
+  final dynamic formBox;
+  final double? vertical, horizontal;
+  final bool? readOnly;
   const EditTextField(
       {Key? key,
       this.headTxt,
@@ -38,12 +42,17 @@ class EditTextField extends StatelessWidget {
       this.inputFormatters,
       this.keyboardType,
       this.maxLength,
+      this.minLines,
       this.maxLines,
       this.onChanged,
       this.onSaved,
+      this.readOnly,
       this.onTap,
+      this.vertical,
+      this.horizontal,
       this.suffixIcon,
       this.hintText,
+      this.formBox,
       this.validator})
       : super(key: key);
 
@@ -60,29 +69,30 @@ class EditTextField extends StatelessWidget {
                     style: labelTextStyle,
                   )
                 : null),
-        TextFormField(
-            onTap: onTap,
-            style: TextStyle(color: offWhiteColor),
-            textAlign: textAlign ?? TextAlign.center,
-            // autovalidateMode: AutovalidateMode.onUserInteraction,
-            onChanged: onChanged,
-            inputFormatters: inputFormatters,
-            initialValue: initialValue,
-            // maxLines: maxLines,
-            // minLines: minLines,
-            maxLength: maxLength,
+        Container(
+          child: TextFormField(
+              onTap: onTap,
+              style: TextStyle(color: txtWhiteColor),
+              textAlign: textAlign ?? TextAlign.center,
+              // autovalidateMode: AutovalidateMode.onUserInteraction,
+              onChanged: onChanged,
+              inputFormatters: inputFormatters,
+              initialValue: initialValue,
+              maxLines: maxLines,
+              minLines: minLines,
+              maxLength: maxLength,
 
-            // focusNode: FocusNode(),
-            focusNode: focusNode,
-            controller: controller,
-            onSaved: onSaved,
-            keyboardType: keyboardType,
-            validator: (value) => validator!(value),
-            // validator: validator,
-            // autofocus: false,
-            // readOnly: readOnly ?? false,
-            scrollPadding: EdgeInsets.zero,
-            decoration: InputDecoration(
+              // focusNode: FocusNode(),
+              focusNode: focusNode,
+              controller: controller,
+              onSaved: onSaved,
+              keyboardType: keyboardType,
+              validator: (value) => validator!(value),
+              // validator: validator,
+              // autofocus: false,
+              readOnly: readOnly ?? false,
+              scrollPadding: EdgeInsets.zero,
+              decoration: InputDecoration(
                 errorStyle: TextStyle(color: blackColor),
                 errorText: errorText,
                 counter: Offstage(),
@@ -92,36 +102,59 @@ class EditTextField extends StatelessWidget {
                     color: Colors.black),
                 labelText: labelText,
                 contentPadding: EdgeInsets.symmetric(
-                    // vertical: vertical != null ? vertical! : 5.0,
-                    // horizontal: horizontal ?? 0.
-                    vertical: 10,
-                    horizontal: 10),
+                    vertical: vertical ?? 10, horizontal: horizontal ?? 10),
                 isDense: true,
-                focusedErrorBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 1.5,
-                    color: offWhiteColor,
-                  ),
-                ),
-                errorBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: offWhiteColor, width: 1.5)),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: offWhiteColor, width: 1.5),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: offWhiteColor, width: 1.5),
-                ),
-                border: UnderlineInputBorder(
-                    borderSide: BorderSide(color: offWhiteColor, width: 1.5)),
-                focusColor: offWhiteColor,
-                hoverColor: offWhiteColor,
+                focusedErrorBorder: formBox == true
+                    ? OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 1.0),
+                      )
+                    : UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 1.5,
+                          color: txtWhiteColor,
+                        ),
+                      ),
+                errorBorder: formBox == true
+                    ? OutlineInputBorder(
+                        borderSide: BorderSide(color: borderColor, width: 1.0),
+                      )
+                    : UnderlineInputBorder(
+                        borderSide:
+                            BorderSide(color: txtWhiteColor, width: 1.5)),
+                focusedBorder: formBox == true
+                    ? OutlineInputBorder(
+                        borderSide: BorderSide(color: borderColor, width: 1.0),
+                      )
+                    : UnderlineInputBorder(
+                        borderSide:
+                            BorderSide(color: txtWhiteColor, width: 1.5),
+                      ),
+                enabledBorder: formBox == true
+                    ? OutlineInputBorder(
+                        borderSide: BorderSide(color: borderColor, width: 1.0),
+                      )
+                    : UnderlineInputBorder(
+                        borderSide:
+                            BorderSide(color: txtWhiteColor, width: 1.5),
+                      ),
+                border: formBox == true
+                    ? OutlineInputBorder(
+                        borderSide: BorderSide(color: borderColor, width: 1.0),
+                      )
+                    : UnderlineInputBorder(
+                        borderSide:
+                            BorderSide(color: txtWhiteColor, width: 1.5)),
+                focusColor: txtWhiteColor,
+                hoverColor: txtWhiteColor,
                 prefixIconConstraints:
                     BoxConstraints(minWidth: 0, minHeight: 0),
                 hintText: hintText,
                 // prefixIcon: prefixIcon,
                 suffixIcon: suffixIcon,
-                suffixIconConstraints:
-                    BoxConstraints.tightFor(width: 35.0, height: 14.0))),
+                // suffixIconConstraints:
+                //     BoxConstraints.tightFor(width: 35.0, height: 14.0)
+              )),
+        ),
       ],
     );
   }
@@ -147,7 +180,7 @@ class ApplyBox extends StatelessWidget {
                   width: 50,
                   height: 25,
                   btnName: 'APPLY',
-                  txtColor: offWhiteColor,
+                  txtColor: txtWhiteColor,
                   color: Colors.green,
                 ),
               ),
@@ -159,5 +192,134 @@ class ApplyBox extends StatelessWidget {
             ),
           ),
         ));
+  }
+}
+
+// ! DropDowN Field
+
+class DropDownBtn extends StatefulWidget {
+  final String? dName;
+  final dynamic listData;
+  final String pageName;
+  String? currentItem;
+  final String? labelText;
+  final double? vertical;
+  final double? horizontal;
+  TextEditingController? listController = new TextEditingController();
+  final dynamic onChanged;
+  // String? Function(String?)? formValidator;
+  // dynamic formValidator;
+  final String? Function(dynamic)? formValidator;
+  final dynamic selectedItemBuilder;
+
+  DropDownBtn(
+      {Key? key,
+      this.selectedItemBuilder,
+      this.labelText,
+      this.dName,
+      this.listData,
+      this.vertical,
+      this.horizontal,
+      this.listController,
+      this.pageName = '',
+      this.formValidator,
+      this.currentItem,
+      this.onChanged})
+      : super(key: key);
+
+  @override
+  _DropDownBtnState createState() => _DropDownBtnState();
+}
+
+class _DropDownBtnState extends State<DropDownBtn> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        widget.labelText != null
+            ? Text(widget.labelText!, style: labelTextStyle)
+            : SizedBox(height: 0.0),
+        DropdownButtonFormField<dynamic>(
+            // ! DROP DOWN MENU dropdownValue
+            dropdownColor: Colors.white,
+            // value: widget.currentItem,
+            value: widget.listController!.text.isNotEmpty
+                ? widget.listController!.text
+                : widget.currentItem,
+            validator: widget.formValidator,
+            isExpanded: true,
+            icon: const Icon(
+              Icons.arrow_drop_down,
+              size: 18,
+            ),
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            alignment: AlignmentDirectional.bottomEnd,
+            iconSize: 18,
+            elevation: 1,
+            // style: smallTextStyle,
+            onChanged: widget.onChanged != null
+                ? widget.onChanged
+                : (dynamic newValue) {
+                    FocusScope.of(context).requestFocus(new FocusNode());
+                    setState(() {
+                      widget.currentItem = newValue;
+                      widget.listController!.text = newValue!;
+                    });
+                  },
+            onTap: () {},
+            selectedItemBuilder: widget.selectedItemBuilder,
+
+            // items: widget.listData.toList(),
+            items:
+                //   widget.listData.map<DropdownMenuItem<String>>((String value) {
+                // return DropdownMenuItem<String>(
+
+                widget.listData.map<DropdownMenuItem>((dynamic value) {
+              return DropdownMenuItem(
+                value: value,
+                child: Text(
+                  value,
+                  // style: smallTextStyle
+                ),
+              );
+            }).toList(),
+
+            // ! DROP DOWN MENU Dname
+
+            hint: Text(
+              widget.currentItem == null
+                  ? widget.pageName.toString()
+                  : widget.dName.toString(),
+              // style: smallTextStyle,
+            ),
+            decoration: InputDecoration(
+                counter: Offstage(),
+                // labelStyle: labelTextStyle,
+                contentPadding: EdgeInsets.symmetric(
+                    vertical: widget.vertical != null ? widget.vertical! : 5.0,
+                    horizontal: widget.horizontal ?? 10.0),
+                isDense: true,
+                errorBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: borderColor, width: 1.0),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: borderColor, width: 1.2),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: borderColor, width: 1.0),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: borderColor, width: 1.2),
+                ),
+                border: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey, width: 1.0)),
+                focusColor: borderColor,
+                hoverColor: borderColor,
+                suffixIconConstraints:
+                    BoxConstraints.tightFor(width: 35.0, height: 12.0))),
+      ],
+    );
   }
 }

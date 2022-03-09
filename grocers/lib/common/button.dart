@@ -93,7 +93,7 @@ class Btn extends StatelessWidget {
           child: Txt(
             t: btnName!,
             style: style ?? null,
-            color: txtColor ?? offWhiteColor,
+            color: txtColor ?? txtWhiteColor,
             textAlign: TextAlign.center,
           ),
         ),

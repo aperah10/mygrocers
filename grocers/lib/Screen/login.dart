@@ -96,7 +96,7 @@ class _LoginScrState extends State<LoginScr> {
                     Txt(
                       t: 'Enter Mobile Number',
                       fontSize: 12,
-                      color: offWhiteColor,
+                      color: txtWhiteColor,
                     ),
                     EditTextField(
                       controller: mobileController,
@@ -111,7 +111,7 @@ class _LoginScrState extends State<LoginScr> {
                         width: double.maxFinite,
                         height: 40,
                         btnName: 'LOGIN',
-                        color: bottomSheet,
+                        color:marronColor ,
                       ),
                     ),
                   ],

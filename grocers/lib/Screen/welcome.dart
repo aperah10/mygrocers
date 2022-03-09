@@ -139,9 +139,9 @@ class WelcomeBody extends StatelessWidget {
           child: Btn(
             height: 40,
             btnName: btnName ?? 'Next',
-            txtColor: offWhiteColor,
+            txtColor: txtWhiteColor,
             onTap: onTap,
-            color: Color.fromARGB(255, 114, 150, 49),
+            color: offgreenColor,
           ),
         )
       ],

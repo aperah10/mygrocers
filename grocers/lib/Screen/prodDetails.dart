@@ -98,7 +98,7 @@ class _ProductDetailScrState extends State<ProductDetailScr> {
           height: 45,
           width: double.infinity,
           btnName: 'Add to Cart',
-          txtColor: offWhiteColor,
+          txtColor: txtWhiteColor,
           color: Colors.green,
           onTap: () => navigationPush(context, CartScreen()),
         ),

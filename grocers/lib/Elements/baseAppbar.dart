@@ -11,6 +11,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function? onTap;
   final String? title;
   final List<Widget>? actionList;
+  final Color? bgColor;
 
   BaseAppBar(
       {this.boolLeading,
@@ -19,11 +20,13 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.centerTitle,
       this.onTap,
       this.title,
+      this.bgColor,
       this.actionList});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: bgColor ?? offWhiteColor,
       elevation: elevation,
       automaticallyImplyLeading: boolLeading ?? true,
       leading: leading,

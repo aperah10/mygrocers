@@ -28,7 +28,7 @@ class OrderDeatilsScreen extends StatelessWidget {
           height: 45,
           width: double.infinity,
           btnName: 'Re-order',
-          txtColor: offWhiteColor,
+          txtColor: txtWhiteColor,
           color: redColor,
         ),
       ),

@@ -97,7 +97,7 @@ class _RegisterScrState extends State<RegisterScr> {
                     Txt(
                       t: 'Enter Mobile Number',
                       fontSize: 12,
-                      color: offWhiteColor,
+                      color: txtWhiteColor,
                     ),
                     EditTextField(
                       controller: mobileController,
@@ -112,7 +112,7 @@ class _RegisterScrState extends State<RegisterScr> {
                         width: double.maxFinite,
                         height: 40,
                         btnName: 'CREATE ACCOUNT',
-                        color: bottomSheet,
+                        color: marronColor,
                       ),
                     ),
                   ],

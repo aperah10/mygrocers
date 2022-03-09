@@ -83,7 +83,10 @@ class _ProductShowScreenState extends State<ProductShowScreen>
             pinned: true,
             snap: false,
             centerTitle: true,
-            title: Txt(t: 'Fruits', style: labelTextStyle),
+            title: Txt(
+              t: 'Fruits',
+              color: orangeColor,
+            ),
             actions: [
               IconButton(
                 icon: Icon(Icons.filter_list),
@@ -318,7 +321,7 @@ class _CheckProd2State extends State<CheckProd2> {
           padding: EdgeInsets.all(3),
 
           btnName: 'ADD',
-          style: TextStyle(color: offWhiteColor, fontSize: 10),
+          style: TextStyle(color: txtWhiteColor, fontSize: 10),
           // txtColor: offWhiteColor,
           color: Colors.green,
         ),

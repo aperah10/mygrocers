@@ -119,7 +119,7 @@ class HomeScreen extends StatelessWidget {
             onPressed: () => navigationPush(context, NotificationScreen()),
             icon: Icons.notifications,
             size: 20,
-            color: offWhiteColor,
+            color: txtWhiteColor,
           )
         ],
       ),

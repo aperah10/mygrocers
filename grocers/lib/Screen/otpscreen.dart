@@ -83,7 +83,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   width: double.maxFinite,
                   height: 40,
                   btnName: 'VERIFY',
-                  color: bottomSheet,
+                  color: marronColor,
                 ),
               ),
             ],
@@ -109,18 +109,18 @@ class OtpInput extends StatelessWidget {
           color: Color.fromARGB(195, 228, 137, 18),
           borderRadius: BorderRadius.circular(6)),
       child: TextField(
-        style: TextStyle(color: offWhiteColor),
+        style: TextStyle(color: txtWhiteColor),
         autofocus: autoFocus,
         textAlign: TextAlign.center,
         keyboardType: TextInputType.number,
         controller: controller,
         maxLength: 1,
-        cursorColor: offWhiteColor,
+        cursorColor: txtWhiteColor,
         // cursorColor: Theme.of(context).primaryColor,
         decoration: const InputDecoration(
             border: OutlineInputBorder(),
             counterText: '',
-            hintStyle: TextStyle(color: Colors.black, fontSize: 20.0)),
+            hintStyle: TextStyle(color: txtBlackColor, fontSize: 20.0)),
         onChanged: (value) {
           if (value.length == 1) {
             FocusScope.of(context).nextFocus();
@@ -130,92 +130,3 @@ class OtpInput extends StatelessWidget {
     );
   }
 }
-
-
-// actions: [
-//             // ! Button for varify
-//             // heightSizedBox(height / 10),
-//             Padding(
-//               padding: const EdgeInsets.only(bottom: 18.0),
-//               child: Center(
-//                 child: Container(
-//                   width: 200,
-//                   height: 50,
-//                   child: Btn(btnName: 'Verify OTP', onTap: _otpRegister
-//                       // () {
-//                       // String otp = '';
-//                       // for (String item in otpValue) {
-//                       //   otp += item;
-//                       // }
-//                       // if (otp.length == 6) {
-//                       //   print('Otp value $otp');
-//                       //   print('otp mobile Number ${widget.phone}}');
-//                       //   var mat =
-//                       //       BlocProvider.of<SellerregconfBloc>(context)
-//                       //         ..add(SelRegOtpVerifyEvent(
-//                       //             phone: widget.phone, otpN: otp));
-
-//                       // } else {
-//                       //   snackBar(context, 'Please fill otp first' + otp);
-//                       // }
-//                       // },
-//                       ),
-//                 ),
-//               ),
-//             ),
-
-//             // ! DON'T receive message
-//             // heightSizedBox(height / 5),
-//             if (_start <= 0)
-//               Row(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 children: [
-//                   Text(
-//                     "Didn't receive OTP?  ",
-//                     style: TextStyle(
-//                       fontSize: 13,
-//                       color: Colors.grey.shade600,
-//                     ),
-//                   ),
-//                   InkWell(
-//                     onTap: () {
-//                       // BlocProvider.of<SellerregconfBloc>(context)
-//                       //   ..add(SelRegReOtpEvent(
-//                       //     phone: widget.phone,
-//                       //   ));
-
-//                       // print('otp mobile Number ${widget.phone}');
-//                       setState(() {
-//                         otpController1.clear();
-//                         otpController2.clear();
-//                         otpController3.clear();
-//                         otpController4.clear();
-//                         otpController5.clear();
-//                         otpController6.clear();
-//                         otpValue.clear();
-//                       });
-
-//                       startTimer();
-//                     },
-//                     child: Text('Resend new OTP',
-//                         style: TextStyle(
-//                             fontSize: 13,
-//                             color: redColor,
-//                             decoration: TextDecoration.underline,
-//                             fontFamily: montserratMedium)),
-//                   ),
-//                 ],
-//               )
-//             else
-//               Text(
-//                 "00:${_start < 10 ? '0' : ''}$_start ",
-//                 style: TextStyle(
-//                     fontSize: 13,
-//                     color: Colors.grey.shade600,
-//                     fontFamily: montserratMedium),
-//                 textAlign: TextAlign.center,
-//               ),
-//           ],
-//         ),
-//       ),
-//     )
