@@ -13,7 +13,7 @@ class WishListScreen extends StatelessWidget {
     return Scaffold(
       appBar: BaseAppBar(
         centerTitle: true,
-        title: 'My Cart',
+        title: 'Wishlist',
       ),
       body: Container(
         child: ListView.builder(

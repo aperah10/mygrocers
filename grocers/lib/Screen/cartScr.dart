@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:grocers/Elements/baseAppbar.dart';
 import 'package:grocers/Screen/home.dart';
@@ -42,27 +44,44 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BaseAppBar(
-        centerTitle: true,
-        title: 'My Cart',
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          // shrinkWrap: true,
-          children: [
-            CartProdVerList(
+      // appBar: BaseAppBar(
+      //   centerTitle: true,
+      //   title: 'My Cart',
+      // ),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBars(
+            title: 'Cart Screen',
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int i) => CartProdContent(
+                prodNumber: i,
                 // plusCallBack: plusCallBack,
                 // minusCallBack: minusCallBack,
                 // price: price,
                 // fullPrice: fullPrice,
                 // quantity: quantity,
-                ),
-            Divider(),
-            CartContentFooter(),
-            Divider(),
-            CartPriceList()
-          ],
-        ),
+              ),
+              childCount: 5, // 1000 list items
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                Divider(),
+                CartContentFooter(),
+                Divider(),
+                CartPriceList()
+              ],
+            ),
+          ),
+          // SliverToBoxAdapter(
+          //   child: Column(
+          //     children: [Divider(), CartPriceList()],
+          //   ),
+          // )
+        ],
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(20),
@@ -207,8 +226,7 @@ class _CartProdContentState extends State<CartProdContent> {
           ),
           Txt(
             t: 'Rs ${price != null ? price : 500}',
-            fontSize: 17,
-            color: Colors.green,
+            style: labelTextStyle,
           ),
         ],
       ),
@@ -260,7 +278,7 @@ class CartContentFooter extends StatelessWidget {
                     IconBtn(
                         icon: icon ?? null,
                         size: 20,
-                        color: Color.fromARGB(255, 102, 161, 104),
+                        color: offgreenColor,
                         onPressed: () {
                           print('update');
                         })
@@ -295,7 +313,7 @@ class CartPriceList extends StatelessWidget {
           datas(
               t1: 'Total Discount',
               t2: '- Rs 300',
-              style: TextStyle(color: Colors.green, fontSize: 15)),
+              style: TextStyle(color: offgreenColor, fontSize: 15)),
           datas(
             t1: 'Tax Charge',
             t2: 'Rs 00.00',
@@ -303,12 +321,11 @@ class CartPriceList extends StatelessWidget {
           datas(
               t1: 'Promo Code',
               t2: '- Rs 500',
-              style: TextStyle(color: Colors.green, fontSize: 15)),
+              style: TextStyle(color: offgreenColor, fontSize: 15)),
           heightSizedBox(5.0),
           Container(
               margin: EdgeInsets.all(15),
-              decoration:
-                  BoxDecoration(color: Color.fromARGB(255, 180, 174, 174)),
+              decoration: BoxDecoration(color: brownWhiteColor),
               padding: EdgeInsets.all(5),
               child: datas(
                 t1: 'Total Pay',

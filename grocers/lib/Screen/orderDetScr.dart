@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocers/Elements/baseAppbar.dart';
+import 'package:grocers/Screen/orderCompleteScr.dart';
 import 'package:grocers/common/button.dart';
 import 'package:grocers/utils/common.dart';
 import 'package:grocers/utils/style.dart';
@@ -30,6 +31,7 @@ class OrderDeatilsScreen extends StatelessWidget {
           btnName: 'Re-order',
           txtColor: txtWhiteColor,
           color: redColor,
+          onTap: () => navigationPush(context, OrderCompleteScreen()),
         ),
       ),
     );
@@ -100,9 +102,7 @@ class OrderDetProd extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
             color: offWhiteColor,
-            border: Border(
-                bottom: BorderSide(
-                    width: 1.0, color: Color.fromARGB(255, 221, 214, 214)))),
+            border: Border(bottom: BorderSide(width: 1.0, color: borderColor))),
         child: ListView.builder(
             shrinkWrap: true,
             itemCount: 3,
@@ -113,7 +113,7 @@ class OrderDetProd extends StatelessWidget {
                   t1: 'product name',
                   t2: '1 kilograme',
                   statTxt: 'Rs. 250.00',
-                  color: Colors.green,
+                  color: offgreenColor,
                 ),
               );
             }));

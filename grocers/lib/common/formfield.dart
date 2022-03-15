@@ -29,6 +29,9 @@ class EditTextField extends StatelessWidget {
   final dynamic formBox;
   final double? vertical, horizontal;
   final bool? readOnly;
+  final bool? filled;
+  final Color? fillColor;
+  final TextStyle? style;
   const EditTextField(
       {Key? key,
       this.headTxt,
@@ -53,7 +56,10 @@ class EditTextField extends StatelessWidget {
       this.suffixIcon,
       this.hintText,
       this.formBox,
-      this.validator})
+      this.filled,
+      this.fillColor,
+      this.validator,
+      this.style})
       : super(key: key);
 
   @override
@@ -72,7 +78,7 @@ class EditTextField extends StatelessWidget {
         Container(
           child: TextFormField(
               onTap: onTap,
-              style: TextStyle(color: txtWhiteColor),
+              style: style ?? TextStyle(color: txtWhiteColor),
               textAlign: textAlign ?? TextAlign.center,
               // autovalidateMode: AutovalidateMode.onUserInteraction,
               onChanged: onChanged,
@@ -93,6 +99,7 @@ class EditTextField extends StatelessWidget {
               readOnly: readOnly ?? false,
               scrollPadding: EdgeInsets.zero,
               decoration: InputDecoration(
+                fillColor: fillColor, filled: filled,
                 errorStyle: TextStyle(color: blackColor),
                 errorText: errorText,
                 counter: Offstage(),
@@ -181,14 +188,14 @@ class ApplyBox extends StatelessWidget {
                   height: 25,
                   btnName: 'APPLY',
                   txtColor: txtWhiteColor,
-                  color: Colors.green,
+                  color: offgreenColor,
                 ),
               ),
               hintText: 'Coupon Code',
               contentPadding: EdgeInsets.all(8),
               isDense: true,
               border: new OutlineInputBorder(
-                  borderSide: new BorderSide(color: Colors.grey)),
+                  borderSide: new BorderSide(color: borderColor)),
             ),
           ),
         ));
@@ -320,6 +327,65 @@ class _DropDownBtnState extends State<DropDownBtn> {
                 suffixIconConstraints:
                     BoxConstraints.tightFor(width: 35.0, height: 12.0))),
       ],
+    );
+  }
+}
+
+// ! Search Box
+class SearchBox extends StatelessWidget {
+  final TextEditingController? controller;
+  final BoxDecoration? decoration;
+
+  final String? hintText;
+
+  final Function(String)? onChanged;
+  final dynamic onTap;
+
+  final dynamic onPressed;
+  final Function(String?)? onSaved;
+
+  final Widget? suffixIcon;
+  final Function? validator;
+  final Color? fillColor;
+
+  const SearchBox(
+      {Key? key,
+      this.controller,
+      this.decoration,
+      this.hintText,
+      this.onChanged,
+      this.onPressed,
+      this.onSaved,
+      this.onTap,
+      this.fillColor,
+      this.suffixIcon,
+      this.validator})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    print(controller!.text);
+    return Container(
+      // color: offWhiteColor,
+      child: EditTextField(
+          formBox: true,
+          fillColor: fillColor ?? txtWhiteColor,
+          style: TextStyle(color: txtBlackColor),
+          filled: true,
+          hintText: 'Search Something',
+          vertical: 15.0,
+          controller: controller,
+          onChanged: (val) {
+            // print(val);
+            // print(controller!.text);
+          },
+          textAlign: TextAlign.start,
+          suffixIcon: IconButton(
+            onPressed: onPressed,
+            icon: controller!.text.isNotEmpty
+                ? Icon(Icons.cancel)
+                : Icon(Icons.search),
+          )),
     );
   }
 }

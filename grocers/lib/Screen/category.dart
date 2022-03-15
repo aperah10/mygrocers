@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:grocers/Elements/baseAppbar.dart';
+import 'package:grocers/common/formfield.dart';
+import 'package:grocers/scrpart/imgslider.dart';
 import 'package:grocers/utils/common.dart';
 
 import '../Elements/all_list_content.dart';
@@ -14,43 +17,27 @@ class CategoryScreen extends StatelessWidget {
   // dynamic cart;
 
   // dynamic cartItem;
+  final TextEditingController? searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            floating: true,
-            pinned: true,
-            snap: false,
-            centerTitle: true,
-            title: Txt(t: 'All Category ', style: labelTextStyle),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.filter_list),
-                onPressed: () {},
-              ),
-            ],
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(40),
-              child: Container(
-                margin: EdgeInsets.only(left: 20, right: 20, bottom: 1),
-                padding: EdgeInsets.all(5),
-                height: 38,
-                color: Colors.white,
-                child: Center(
-                  child: TextField(
-                    decoration: InputDecoration(
-                        hintText: 'Search here',
-                        prefixIcon: Icon(Icons.search),
-                        suffixIcon: Icon(Icons.camera_alt)),
-                  ),
-                ),
+          // ! Sliver app Bar
+
+          SliverAppBars(
+            title: 'All Category',
+            bottomChild: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+              child: SearchBox(
+                controller: searchController,
               ),
             ),
           ),
-          // Other Sliver Widgets
+
+          //  ! Sliver Product Content
 
           SliverPadding(
             padding: const EdgeInsets.all(5.0),
@@ -73,5 +60,61 @@ class CategoryScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+// ! Category ProdList
+class CategeoryGridProdList extends StatelessWidget {
+  final String? title;
+  final String? imageUrl;
+
+  final dynamic onTap;
+  final bool? fromSubProducts;
+  const CategeoryGridProdList(
+      {Key? key,
+      this.title,
+      this.imageUrl,
+      this.onTap,
+      this.fromSubProducts = false})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+        onTap: onTap,
+        child: Container(
+          // padding: EdgeInsets.only(top: 3),
+          decoration: BoxDecoration(
+              color: offWhiteColor,
+              borderRadius: BorderRadius.circular(5.0),
+              border: Border.all(
+                color: Color.fromARGB(255, 236, 234, 234),
+              )),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Center(
+                  child: ImgIcon(
+                    src: imageUrl!,
+                    width: 150,
+                    height: 100,
+                    padding: EdgeInsets.all(2),
+                  ),
+                ),
+                Divider(),
+                // ! title  and Subtitle for
+                Container(
+                  padding:
+                      EdgeInsets.only(left: 3, right: 3, top: 3, bottom: 2),
+                  child: Txt(
+                    t: title!.length <= 40 ? title! : title!.substring(0, 40),
+                    textAlign: TextAlign.left,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
+              ]),
+        ));
   }
 }

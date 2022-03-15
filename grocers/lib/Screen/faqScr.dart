@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocers/Elements/baseAppbar.dart';
 import 'package:grocers/common/button.dart';
+import 'package:grocers/utils/style.dart';
 
 class FaqScreen extends StatelessWidget {
   const FaqScreen({Key? key}) : super(key: key);
@@ -58,10 +59,8 @@ class _FaqContentState extends State<FaqContent> {
       },
       child: Container(
         decoration: BoxDecoration(
-            color: click == true ? Color.fromARGB(255, 238, 235, 235) : null,
-            border: Border(
-                bottom: BorderSide(
-                    width: 1.0, color: Color.fromARGB(255, 221, 214, 214)))),
+            color: click == true ? FaqBgColor : null,
+            border: Border(bottom: BorderSide(width: 1.0, color: borderColor))),
         child: Column(
           children: [
             Row(

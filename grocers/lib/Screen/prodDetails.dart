@@ -17,7 +17,7 @@ class _ProductDetailScrState extends State<ProductDetailScr> {
   final List img = [
     'assets/images/pulse.png',
     'assets/images/onion.png',
-    'assets/images/snacks.png',
+    // 'assets/images/snacks.png',
     'assets/images/potato.png',
     'assets/images/pulse.png',
     'assets/images/watermelon.png',
@@ -39,58 +39,61 @@ class _ProductDetailScrState extends State<ProductDetailScr> {
         title: 'Product Details',
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: ImgIcon(
-                margin: EdgeInsets.all(8),
-                src: 'assets/icons/like-icon.png',
-                width: 25,
-                height: 25,
+      body:
+          // SingleChildScrollView(
+          // child:
+          ListView(
+        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Align(
+            alignment: Alignment.topRight,
+            child: ImgIcon(
+              margin: EdgeInsets.all(8),
+              src: 'assets/icons/like-icon.png',
+              width: 25,
+              height: 25,
+            ),
+          ),
+
+          // ! Image Section
+          Container(
+            alignment: Alignment.center,
+            // color: Colors.red,
+            child: ImgIcon(
+              src: listImgSrc != null
+                  ? listImgSrc.toString()
+                  : 'assets/images/pulse.png',
+              width: 300,
+              height: 200,
+            ),
+          ),
+          heightSizedBox(5.0),
+          //  Image List Section
+          ImgHorizontalList(
+            cheight: 80,
+            prodList: img,
+            callBack: imgcallBack,
+            itemBorder: listImgSrc != null ? listImgSrc.toString() : null,
+          ),
+          // !  Product Content
+          ProdDetailsContent(),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              alignment: Alignment.bottomCenter,
+              child: Txt(
+                t: 'GitHub, Inc. is a provider of Internet hosting for software development and version control using Git. It offers the distributed version control and source code management functionality of Git, plus its own features. ',
+                style: smallTextStyle,
               ),
             ),
+          )
 
-            // ! Image Section
-            Container(
-              alignment: Alignment.center,
-              // color: Colors.red,
-              child: ImgIcon(
-                src: listImgSrc != null
-                    ? listImgSrc.toString()
-                    : 'assets/images/pulse.png',
-                width: 300,
-                height: 200,
-              ),
-            ),
-            heightSizedBox(5.0),
-            //  Image List Section
-            ImgHorizontalList(
-              prodList: img,
-              callBack: imgcallBack,
-              itemBorder: listImgSrc != null ? listImgSrc.toString() : null,
-            ),
-            // !  Product Content
-            ProdDetailsContent(),
-
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                alignment: Alignment.bottomCenter,
-                child: Txt(
-                  t: 'GitHub, Inc. is a provider of Internet hosting for software development and version control using Git. It offers the distributed version control and source code management functionality of Git, plus its own features. ',
-                  style: smallTextStyle,
-                ),
-              ),
-            )
-
-            // ! Btn  for Cart
-          ],
-        ),
+          // ! Btn  for Cart
+        ],
       ),
+      // ),
       bottomSheet: Padding(
         padding: const EdgeInsets.all(20),
         child: Btn(
@@ -99,7 +102,7 @@ class _ProductDetailScrState extends State<ProductDetailScr> {
           width: double.infinity,
           btnName: 'Add to Cart',
           txtColor: txtWhiteColor,
-          color: Colors.green,
+          color: offgreenColor,
           onTap: () => navigationPush(context, CartScreen()),
         ),
       ),
@@ -177,6 +180,7 @@ class _ProdDetailsContentState extends State<ProdDetailsContent> {
           child: Txt(
             t: 'Title Name',
             fontSize: 15,
+            style: labelTextStyle,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -186,7 +190,7 @@ class _ProdDetailsContentState extends State<ProdDetailsContent> {
           child: Txt(
             // textAlign: TextAlign.left,
             t: '${quantity != null ? quantity : 1} KG',
-            fontSize: 17,
+            fontSize: 20,
             color: greyColor,
           ),
         ),
@@ -216,7 +220,7 @@ class _ProdDetailsContentState extends State<ProdDetailsContent> {
           Txt(
             t: 'Rs ${price != null ? price : 500}',
             fontSize: 17,
-            color: Colors.green,
+            color: offgreenColor,
           ),
         ],
       ),

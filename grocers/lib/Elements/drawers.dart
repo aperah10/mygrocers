@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocers/Screen/helpScr.dart';
 import 'package:grocers/Screen/login.dart';
+import 'package:grocers/Screen/offerScr.dart';
 import 'package:grocers/Screen/orderScr.dart';
 import 'package:grocers/utils/common.dart';
 import 'package:grocers/utils/style.dart';
@@ -45,7 +46,11 @@ class _DrawerScreenState extends State<DrawerScreen> {
       ),
       CusDrawerList(title: 'Manage Address', icon: Icons.location_on),
       CusDrawerList(title: 'Payment ', icon: Icons.payment),
-      CusDrawerList(title: 'Offers', icon: Icons.pages),
+      CusDrawerList(
+        title: 'Offers',
+        icon: Icons.pages,
+        submitMethod: OffersScreen(),
+      ),
       CusDrawerList(
           title: 'Notifictions',
           icon: Icons.payment,
@@ -101,7 +106,7 @@ class CusDrawerList extends StatelessWidget {
           leading: Icon(
             icon,
             size: 20,
-            color: Colors.green,
+            color: offgreenColor,
           ),
           trailing: Icon(
             Icons.arrow_forward_ios,

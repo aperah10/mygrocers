@@ -28,7 +28,7 @@ class OrderIdContent extends StatelessWidget {
                   child: statTxt != null
                       ? Txt(
                           t: statTxt ?? '',
-                          color: color ?? Color.fromARGB(255, 218, 151, 26),
+                          color: color ?? orangeColor,
                         )
                       : null)
             ],
@@ -77,6 +77,7 @@ class OrderIdAdrContent extends StatelessWidget {
             child: Row(
               children: [
                 Radio(
+                  activeColor: offgreenColor,
                   value: value,
                   groupValue: groupVal,
                   onChanged: onChanged,

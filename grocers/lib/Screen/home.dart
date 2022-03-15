@@ -13,183 +13,212 @@ import '../common/button.dart';
 import '../scrpart/imgslider.dart';
 import 'category.dart';
 
-// class HomeScreen extends StatelessWidget {
-//   const HomeScreen({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: CustomScrollView(
-//         slivers: [
-//           SliverAppBar(
-//             // automaticallyImplyLeading: false,
-//             floating: true,
-//             pinned: true,
-//             snap: false,
-//             centerTitle: false,
-//             title: Text('Kindacode.com'),
-//             actions: [
-//               IconButton(
-//                 icon: Icon(Icons.shopping_cart),
-//                 onPressed: () {},
-//               ),
-//             ],
-//             bottom: PreferredSize(
-//               preferredSize: Size.fromHeight(50),
-//               child: Container(
-//                 margin: EdgeInsets.only(left: 20, right: 20, bottom: 5),
-//                 height: 38,
-//                 color: Colors.white,
-//                 child: Center(
-//                   child: TextField(
-//                     decoration: InputDecoration(
-//                         hintText: 'Search for something',
-//                         prefixIcon: Icon(Icons.search),
-//                         suffixIcon: Icon(Icons.camera_alt)),
-//                   ),
-//                 ),
-//               ),
-//             ),
-//             //  Container(
-//             //     width: double.infinity,
-//             //     height: 40,
-//             //     color: Colors.white,
-//             //     child: Center(
-//             //       child: TextField(
-//             //         decoration: InputDecoration(
-//             //             hintText: 'Search for something',
-//             //             prefixIcon: Icon(Icons.search),
-//             //             suffixIcon: Icon(Icons.camera_alt)),
-//             //       ),
-//             //     ),
-
-//             // ),
-//           ),
-//           // Other Sliver Widgets
-//           SliverList(
-//             delegate: SliverChildListDelegate([
-//               ImgSlider(),
-// //               heightSizedBox(20.0),
-
-//               // Container(
-//               //   height: 400,
-//               //   child: Center(
-//               //     child: Text(
-//               //       'This is an awesome shopping platform',
-//               //     ),
-//               //   ),
-//               // ),
-//               // Container(
-//               //   height: 1000,
-//               //   color: Color.fromARGB(255, 172, 117, 135),
-//               // ),
-//             ]),
-//           ),
-
-//           SliverToBoxAdapter(
-//               child: SingleChildScrollView(
-//                   child: Container(height: 100.0, child: CategoryListItem()))),
-//         ],
-//       ),
-//       drawer: DrawerScreen(),
-//     );
-//   }
-// }
-
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
+  final TextEditingController? searchController = TextEditingController();
   var scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: BaseAppBar(
-        // boolLeading: false,
-        leading: IconButton(
-          icon: Icon(Icons.account_circle_rounded),
-          // onPressed: () => Scaffold.of(context).openDrawer(),
-          onPressed: () {
-            scaffoldKey.currentState?.openDrawer();
-          },
-        ),
-        title: 'Hey, Username',
-        centerTitle: true,
-        actionList: [
-          IconBtn(
-            onPressed: () => navigationPush(context, NotificationScreen()),
-            icon: Icons.notifications,
-            size: 20,
-            color: txtWhiteColor,
-          )
+      body: CustomScrollView(
+        slivers: [
+          // ! Sliver app Bar
+          SliverAppBar(
+            backgroundColor: offWhiteColor,
+            leading: IconButton(
+              icon: Icon(
+                Icons.account_circle_rounded,
+                color: txtBlackColor,
+              ),
+              // onPressed: () => Scaffold.of(context).openDrawer(),
+              onPressed: () {
+                scaffoldKey.currentState?.openDrawer();
+              },
+            ),
+            title: Text(
+              'Hey, Username',
+              style: appBarTS,
+            ),
+            centerTitle: true,
+            bottom: PreferredSize(
+                preferredSize: Size.fromHeight(80),
+                child: Container(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15.0),
+                        child: AddressPart(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 15.0),
+                        child: SearchBox(
+                          fillColor: FaqBgColor,
+                          controller: searchController,
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
+            actions: <Widget>[
+              IconBtn(
+                onPressed: () => navigationPush(context, NotificationScreen()),
+                icon: Icons.notification_add_outlined,
+                size: 20,
+                color: txtBlackColor,
+              )
+            ],
+          ),
+          SliverList(
+            delegate:
+                SliverChildListDelegate([ImgSlider(), CategoryListItem()]),
+          ),
+
+          // ! First List
+          SliverPadding(
+            padding: const EdgeInsets.all(3),
+            sliver: SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  Divider(),
+                  Container(
+                      alignment: Alignment.center,
+                      child: Txt(
+                        t: 'Exclusive Product ',
+                        color: marronColor,
+                      )),
+                ],
+              ),
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.all(5.0),
+            sliver: SliverGrid(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: MediaQuery.of(context).size.width /
+                      (MediaQuery.of(context).size.height / 1.9),
+                  mainAxisSpacing: 10.0,
+                  crossAxisSpacing: 10.0,
+                ),
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  return CategeoryGridProdList(
+                    // onTap: () => navigationPush(context, ProductShowScreen()),
+                    imageUrl: 'assets/images/banana.png',
+                    title: 'Categoryname',
+                  );
+                }, childCount: 5)),
+          ),
         ],
       ),
       drawer: DrawerScreen(),
-      body: SingleChildScrollView(
-        child: Column(
-          //   ListView(
-          // shrinkWrap: true,
-          children: [
-            heightSizedBox(5.0),
-            Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: AddressPart(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 43.0),
-                  child: SearchPart(),
-                ),
-              ],
-            ),
-            ListView(shrinkWrap: true, children: [
-              heightSizedBox(20.0),
-              ImgSlider(),
-              heightSizedBox(20.0),
-              CategoryListItem(),
-              heightSizedBox(20.0),
-              HomeProdGridList(),
-            ]),
-          ],
-        ),
-      ),
     );
   }
 }
+
+// class HomeScreen extends StatelessWidget {
+//   HomeScreen({Key? key}) : super(key: key);
+//   var scaffoldKey = GlobalKey<ScaffoldState>();
+//   final TextEditingController? searchController = TextEditingController();
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       key: scaffoldKey,
+//       appBar: BaseAppBar(
+//         // boolLeading: false,
+//         leading: IconButton(
+//           icon: Icon(
+//             Icons.account_circle_rounded,
+//             color: txtBlackColor,
+//           ),
+//           // onPressed: () => Scaffold.of(context).openDrawer(),
+//           onPressed: () {
+//             scaffoldKey.currentState?.openDrawer();
+//           },
+//         ),
+//         title: 'Hey, Username',
+//         centerTitle: true,
+//         actionList: [
+//           IconBtn(
+//             onPressed: () => navigationPush(context, NotificationScreen()),
+//             icon: Icons.notification_add_outlined,
+//             size: 20,
+//             color: txtBlackColor,
+//           )
+//         ],
+//       ),
+//       drawer: DrawerScreen(),
+//       body: SingleChildScrollView(
+//         child: Column(
+//           //   ListView(
+//           // shrinkWrap: true,
+//           children: [
+//             heightSizedBox(5.0),
+//             Stack(
+//               children: [
+//                 Padding(
+//                   padding: const EdgeInsets.only(left: 10.0),
+//                   child: AddressPart(),
+//                 ),
+//                 Padding(
+//                   padding:
+//                       const EdgeInsets.only(top: 43.0, left: 15, right: 15),
+//                   child: SearchBox(
+//                     fillColor: dashBgColor,
+//                     controller: searchController,
+//                   ),
+//                 ),
+//               ],
+//             ),
+//             ListView(shrinkWrap: true, children: [
+//               heightSizedBox(20.0),
+//               ImgSlider(),
+//               heightSizedBox(20.0),
+//               CategoryListItem(),
+//               heightSizedBox(20.0),
+//               HomeProdGridList(),
+//             ]),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 // 1 Search and Address Part
-class SearchPart extends StatelessWidget {
-  const SearchPart({Key? key}) : super(key: key);
+// class SearchPart extends StatelessWidget {
+//   const SearchPart({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 10.0,
-        right: 15.0,
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Color.fromARGB(246, 246, 246, 255),
-          border: Border.all(width: .5),
-          borderRadius: BorderRadius.circular(5),
-        ),
-        padding: EdgeInsets.only(left: 15),
-        child: TextFormField(
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: 'Search here',
-            // prefixIcon: Icon(Icons.search),
-            suffixIcon: IconBtn(
-              icon: Icons.search,
-              color: blackColor,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.only(
+//         left: 10.0,
+//         right: 15.0,
+//       ),
+//       child: Container(
+//         decoration: BoxDecoration(
+//           color: Color.fromARGB(246, 246, 246, 255),
+//           border: Border.all(width: .5),
+//           borderRadius: BorderRadius.circular(5),
+//         ),
+//         padding: EdgeInsets.only(left: 15),
+//         child: TextFormField(
+//           decoration: InputDecoration(
+//             border: InputBorder.none,
+//             hintText: 'Search here',
+//             // prefixIcon: Icon(Icons.search),
+//             suffixIcon: IconBtn(
+//               icon: Icons.search,
+//               color: blackColor,
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 // ! Address Part in Home
 class AddressPart extends StatelessWidget {
@@ -281,7 +310,7 @@ class CategoryListItem extends StatelessWidget {
           ),
         ),
         Container(
-          height: 130,
+          height: 150,
           child: ListView.builder(
             shrinkWrap: true,
             itemCount: 15,
@@ -299,7 +328,7 @@ class CategoryListItem extends StatelessWidget {
                       Container(
                         child: Image.asset(
                           'assets/images/snacks.png',
-                          height: 80,
+                          height: 100,
                         ),
                       ),
 
@@ -345,6 +374,7 @@ class HomeProdGridList extends StatelessWidget {
           Container(
             child: GridView.builder(
               // primary: false,
+              physics: ScrollPhysics(),
               padding: EdgeInsets.all(1.0),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,

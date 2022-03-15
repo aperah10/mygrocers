@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:grocers/Elements/baseAppbar.dart';
+import 'package:grocers/Screen/prodDetails.dart';
 import 'package:grocers/Screen/wishlistScr.dart';
 import 'package:grocers/utils/common.dart';
 import 'package:grocers/utils/style.dart';
 
-import '../Elements/all_list_content.dart';
 import '../common/button.dart';
 import '../scrpart/imgslider.dart';
 
@@ -15,130 +15,80 @@ class ProductShowScreen extends StatefulWidget {
   State<ProductShowScreen> createState() => _ProductShowScreenState();
 }
 
-class _ProductShowScreenState extends State<ProductShowScreen>
-    with TickerProviderStateMixin {
+class _ProductShowScreenState extends State<ProductShowScreen> {
   final List<String> item = [
     'All',
     'Banana',
     'Orange',
     'Mango',
     'All2',
+    'All3',
+    'Banana1',
+    'Orange1',
+    'Mango1',
+    'All4',
+    'All5',
+    'Banana2',
+    'Orange2',
+    'Mango2',
+    'All6',
   ];
-  dynamic _activeTabIndex;
-
-  final List<Widget> tabs = [];
-  TabController? _controller;
-  int _selectedIndex = 0;
-  @override
-  void initState() {
-    if (item.length > 0) {
-      for (var i in item) {
-        tabs.add(Tab(
-          text: i,
-        ));
-      }
-    }
-    super.initState();
-    _controller = TabController(length: tabs.length, vsync: this);
-    // _controller!.addListener(_setActiveTabIndex);
-
-    // _controller = TabController(vsync: this, length: 4)
-    //   ..addListener(() {
-    //     setState(() {
-    //       _activeTabIndex = _controller!.index;
-    //       // switch (_contro ller!.index) {
-    //       //   case 0:
-    //       //   // some code here
-    //       //   case 1:
-    //       //   // some code here
-    //       // }
-    //     });
-    // });
-  }
-
-  // void _setActiveTabIndex() {
-  //   _activeTabIndex = _controller!.index;
-  // }
-
-  @override
-  void dispose() {
-    _controller!.dispose();
-    super.dispose();
+  dynamic menuItem = 'All';
+  menuCallback(String value) {
+    setState(() {
+      menuItem = value;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // if (item.length > 0) {
-    // for (var i in item) {
-    //   tabs.add(Tab(
-    //     text: i,
-    //   ));
-    // }
-
     return Scaffold(
       body: CustomScrollView(
         slivers: [
+          SliverAppBars(
+            elevation: 4,
+            title: 'Product List',
+          ),
+
           SliverAppBar(
-            floating: true,
+            toolbarHeight: 30,
+
+            // backgroundColor: offgreenColor,
+            // expandedHeight: 60.0,
+            elevation: 0.0,
+
+            automaticallyImplyLeading: false,
             pinned: true,
-            snap: false,
-            centerTitle: true,
-            title: Txt(
-              t: 'Fruits',
-              color: orangeColor,
-            ),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.filter_list),
-                onPressed: () {},
+            floating: false,
+
+            flexibleSpace: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 30,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: item.length,
+                    itemBuilder: (context, i) {
+                      return MenuItem(
+                        i: item[i],
+                        selecItem: menuItem,
+                        menuCallBack: menuCallback,
+                      );
+                    },
+                  ),
+                ),
               ),
-            ],
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(55),
-              child:
-                  // Container(
-                  //   height: 50,
-                  //   child: ListView.builder(
-                  //       shrinkWrap: true,
-                  //       scrollDirection: Axis.horizontal,
-                  //       itemCount: 25,
-                  //       itemBuilder: ((context, index) {
-                  //         return Text('Home $index');
-                  //       })),
-                  // )
-                  DefaultTabController(
-                      length: tabs.length,
-                      child: TabBar(
-                        controller: _controller,
-                        isScrollable: true, // Required
-                        unselectedLabelColor: Colors.white, // Other tabs color
-                        labelPadding: EdgeInsets.symmetric(
-                            horizontal: 10), // Space between tabs
-                        indicator: UnderlineTabIndicator(
-                          borderSide: BorderSide(
-                              color: Colors.orange,
-                              width: 2), // Indicator height
-                          insets: EdgeInsets.symmetric(
-                              horizontal: 20), // Indicator width
-                        ),
-                        tabs: tabs,
-                      )),
             ),
           ),
+
+          //  ! SLIVER PRODUCT CONTENT
           SliverList(
               delegate: SliverChildBuilderDelegate((context, i) {
-            // for (var i in tabs) {
-            //   // print(i);
-            // }
-            // print(_controller!.index);
-            // print(_controller!.indexIsChanging);
-            // print(_activeTabIndex);
-            return Column(
-              children: [
-                // Text('tab ${_controller!.index} '),
-                CheckProd1(),
-              ],
-            );
+            return InkWell(
+                onTap: () => navigationPush(context, ProductDetailScr()),
+                child: CheckProd1());
           }, childCount: 11))
         ],
       ),
@@ -151,35 +101,39 @@ class _ProductShowScreenState extends State<ProductShowScreen>
   // }
 }
 
-// ! staless Widget
-// class ProdShowScreen extends StatefulWidget {
-//   ProdShowScreen({Key? key}) : super(key: key);
+// ! Menu Item
+class MenuItem extends StatefulWidget {
+  final dynamic i;
+  final dynamic selecItem;
+  dynamic menuCallBack;
+  MenuItem({Key? key, this.i, this.selecItem, this.menuCallBack})
+      : super(key: key);
 
-//   @override
-//   State<ProdShowScreen> createState() => _ProdShowScreenState();
-// }
+  @override
+  State<MenuItem> createState() => _MenuItemState();
+}
 
-// class _ProdShowScreenState extends State<ProdShowScreen> {
-//   dynamic childVal = false;
+class _MenuItemState extends State<MenuItem> {
+  dynamic item = false;
+  @override
+  Widget build(BuildContext context) {
+    // print(widget.selecItem);
+    return InkWell(
+      onTap: () => widget.menuCallBack(widget.i),
+      child: Container(
+        margin: const EdgeInsets.only(right: 5.0, left: 5),
+        child: Text(
+          '${widget.i}',
+          style: TextStyle(
+              color:
+                  widget.selecItem == widget.i ? orangeColor : txtBlackColor),
+        ),
+      ),
+    );
+  }
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: BaseAppBar(
-//         centerTitle: true,
-//         title: 'ProductList',
-//       ),
-//       body: Container(
-//         child: ListView.builder(
-//             itemCount: 10,
-//             itemBuilder: (context, i) {
-//               return CheckProd1();
-//             }),
-//       ),
-//     );
-//   }
-// }
-
+// 1 Product
 class CheckProd1 extends StatefulWidget {
   final dynamic i;
   CheckProd1({Key? key, this.i}) : super(key: key);

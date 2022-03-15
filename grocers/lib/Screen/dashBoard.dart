@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:grocers/Elements/baseAppbar.dart';
+import 'package:grocers/Screen/cartScr.dart';
+import 'package:grocers/Screen/profileScr.dart';
+import 'package:grocers/Screen/searchScr.dart';
+import 'package:grocers/Screen/wishlistScr.dart';
 
 import '../utils/style.dart';
+import 'home.dart';
 
-class SellerDashboard extends StatefulWidget {
+class UserNavigationBar extends StatefulWidget {
   final int? sellerId;
   int? currentTab;
   Widget? currentPage;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  SellerDashboard({Key? key, this.currentTab, this.sellerId}) {
+  UserNavigationBar({Key? key, this.currentTab, this.sellerId}) {
     if (currentTab == null) currentTab = 0;
   }
   @override
-  _SellerDashboardState createState() => _SellerDashboardState();
+  _UserNavigationBarState createState() => _UserNavigationBarState();
 }
 
-class _SellerDashboardState extends State<SellerDashboard> {
+class _UserNavigationBarState extends State<UserNavigationBar> {
   @override
   initState() {
     super.initState();
@@ -26,26 +32,26 @@ class _SellerDashboardState extends State<SellerDashboard> {
       widget.currentTab = tabItem;
       switch (tabItem) {
         case 0:
-          // widget.currentPage = SellerHomeScr(
-          //   sellerId: widget.sellerId,
-          // );
+          widget.currentPage = HomeScreen(
+              // sellerId: widget.sellerId,
+              );
           break;
         case 1:
-          // widget.currentPage = SellerTrackOrderScr(
-          //   sellerId: widget.sellerId,
-          // );
+          widget.currentPage = SearchScreen(
+              // sellerId: widget.sellerId,
+              );
           break;
         case 2:
-          // widget.currentPage = SellerProgressScr(
-          //   sellerId: widget.sellerId,
-          // );
+          widget.currentPage = CartScreen(
+              // sellerId: widget.sellerId,
+              );
           break;
         case 3:
-          // widget.currentPage = SelGeneratePromoCodes(sellerId: widget.sellerId);
+          widget.currentPage = WishListScreen();
 
           break;
         case 4:
-          // widget.currentPage = Profile();
+          widget.currentPage = ProfileScreen();
           // widget.currentPage = SelGeneratePromoCodes(sellerId: widget.sellerId);
           break;
         // case 5:
@@ -62,10 +68,10 @@ class _SellerDashboardState extends State<SellerDashboard> {
       body: widget.currentPage,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: redColor,
+        selectedItemColor: offgreenColor,
         // selectedFontSize: 0,
         // unselectedFontSize: 0,
-        unselectedItemColor: darkBlueColor,
+        unselectedItemColor: offWhiteColor,
         iconSize: 25,
         backgroundColor: Colors.white,
         currentIndex: widget.currentTab!,
@@ -74,10 +80,10 @@ class _SellerDashboardState extends State<SellerDashboard> {
 
         showUnselectedLabels: true,
         selectedLabelStyle: TextStyle(
-            fontSize: 12, color: redColor, fontFamily: montserratMedium),
+            fontSize: 12, color: offgreenColor, fontFamily: montserratMedium),
 
         unselectedLabelStyle: TextStyle(
-            fontSize: 12, color: darkBlueColor, fontFamily: montserratMedium),
+            fontSize: 12, color: Colors.black38, fontFamily: montserratMedium),
         unselectedFontSize: 12,
 
         onTap: (int i) {
@@ -86,50 +92,47 @@ class _SellerDashboardState extends State<SellerDashboard> {
         items: [
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/icons/sell-food.png',
+              'assets/icons/bottom-1.png',
               height: 22,
-              color: widget.currentTab == 0 ? redColor : darkBlueColor,
+              color: widget.currentTab == 0 ? offgreenColor : Colors.black38,
             ),
-            label: 'Kitchen',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/icons/track-order.png',
+              'assets/icons/bottom-2.png',
               height: 22,
-              color: widget.currentTab == 1 ? redColor : darkBlueColor,
+              color: widget.currentTab == 1 ? offgreenColor : Colors.black38,
             ),
-            label: 'Track Order',
+            label: 'Search Bar',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/icons/progress.png',
+              'assets/icons/bottom-3.png',
               height: 22,
-              color: widget.currentTab == 2 ? redColor : darkBlueColor,
+              color: widget.currentTab == 2 ? offgreenColor : Colors.black38,
             ),
-            label: 'Progress',
-          ),
-          // BottomNavigationBarItem(
-          //   icon: Image.asset(
-          //     'assets/icons/inbox.png',
-          //     height: 22,
-          //     color: widget.currentTab == 3 ? redColor : darkBlueColor,
-          //   ),
-          //   label: 'Chat',
-          // ),
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/icons/promo-code.png',
-              height: 22,
-              color: widget.currentTab == 3 ? redColor : darkBlueColor,
-            ),
-            label: 'Promo Code',
+            label: 'Cart',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/icons/profile.png',
+              'assets/icons/bottom-4.png',
               height: 22,
-              color: widget.currentTab == 4 ? redColor : darkBlueColor,
+              color: widget.currentTab == 3 ? offgreenColor : Colors.black38,
             ),
+            label: 'Like',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.account_circle,
+              size: 22,
+              color: widget.currentTab == 4 ? offgreenColor : Colors.black38,
+            ),
+            //  Image.asset(
+            //   'assets/icons/bottom-5.png',
+            //   height: 22,
+            //   color: widget.currentTab == 4 ? offgreenColor : Colors.black38,
+            // ),
             label: 'Profile',
           ),
         ],

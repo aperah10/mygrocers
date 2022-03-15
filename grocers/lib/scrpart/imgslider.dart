@@ -1,5 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:grocers/common/button.dart';
+import 'package:grocers/utils/common.dart';
+import 'package:grocers/utils/style.dart';
 
 class ImgSlider extends StatelessWidget {
   @override
@@ -95,8 +98,15 @@ class ImgHorizontalList extends StatelessWidget {
   final dynamic prodList;
   final dynamic callBack;
   final dynamic itemBorder;
+  final dynamic btn;
+  final double? cheight;
   const ImgHorizontalList(
-      {Key? key, this.itemBorder, this.prodList, this.callBack})
+      {Key? key,
+      this.itemBorder,
+      this.cheight,
+      this.btn,
+      this.prodList,
+      this.callBack})
       : super(key: key);
 
   @override
@@ -104,7 +114,7 @@ class ImgHorizontalList extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(5),
       // color: Colors.red,
-      height: 55,
+      height: cheight ?? 55,
       width: double.infinity,
       child: ListView.builder(
           itemCount: prodList.length,
@@ -116,18 +126,36 @@ class ImgHorizontalList extends StatelessWidget {
                 callBack(prodList[i]);
                 // print('pics ${prodList[i]}');
               },
-              child: Container(
-                decoration: prodList[i] == itemBorder
-                    ? BoxDecoration(
-                        border: Border.all(width: 1, color: Colors.green),
-                        borderRadius: BorderRadius.circular(5))
-                    : null,
-                child: ImgIcon(
-                  margin: EdgeInsets.all(3),
-                  src: '${prodList[i]}',
-                  width: 50,
-                  height: 50,
-                ),
+              child: Column(
+                children: [
+                  Container(
+                    decoration: prodList[i] == itemBorder
+                        ? BoxDecoration(
+                            border: Border.all(width: 1, color: Colors.green),
+                            borderRadius: BorderRadius.circular(5))
+                        : null,
+                    child: ImgIcon(
+                      margin: EdgeInsets.all(3),
+                      src: '${prodList[i]}',
+                      width: 50,
+                      height: 50,
+                    ),
+                  ),
+                  // heightSizedBox(3.0),
+                  Container(
+                    child: btn != null
+                        ? Btn(
+                            padding: EdgeInsets.all(2),
+                            color: redColor,
+                            height: 20,
+                            btnName: 'DELETE',
+                            style: TextStyle(
+                              color: txtWhiteColor,
+                              fontSize: 12,
+                            ))
+                        : null,
+                  )
+                ],
               ),
             );
           }),

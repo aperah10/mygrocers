@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocers/Screen/dashBoard.dart';
 import 'package:grocers/Screen/home.dart';
 import '../common/button.dart';
 import '../utils/common.dart';
@@ -27,7 +28,7 @@ class _OtpScreenState extends State<OtpScreen> {
     print('Otp value $otpData');
     if (otpData!.length == 4) {
       print('otp mobile Number ${widget.phone}');
-      navigationPush(context, HomeScreen());
+      navigationRemoveUntil(context, UserNavigationBar(currentTab: 0));
     } else {
       snackBar(context, 'Please fill otp first');
     }

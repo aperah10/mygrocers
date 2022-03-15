@@ -153,7 +153,7 @@ class OrderItemStatus extends StatelessWidget {
       return IconTxtWid(
         icon: Icons.add_task_rounded,
         txt: 'Delivered',
-        color: Colors.green,
+        color: offgreenColor,
       );
     }
     if (statusVal == 'Cancel') {
@@ -170,7 +170,7 @@ class OrderItemStatus extends StatelessWidget {
         width: 80,
         btnName: 'TrackOrder',
         txtColor: txtWhiteColor,
-        color: Colors.green,
+        color: offgreenColor,
       ),
     );
   }
@@ -186,7 +186,7 @@ class IconTxtWid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Row(children: [
+        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       IconBtn(
         icon: icon,
         color2: color,
