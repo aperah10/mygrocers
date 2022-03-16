@@ -30,7 +30,7 @@ class EditTextField extends StatelessWidget {
   final double? vertical, horizontal;
   final bool? readOnly;
   final bool? filled;
-  final Color? fillColor;
+  final Color? fillColor, txtColor, hoverColor;
   final TextStyle? style;
   const EditTextField(
       {Key? key,
@@ -40,6 +40,7 @@ class EditTextField extends StatelessWidget {
       this.controller,
       this.labelText,
       this.errorText,
+      this.txtColor,
       this.focusNode,
       this.initialValue,
       this.inputFormatters,
@@ -58,6 +59,7 @@ class EditTextField extends StatelessWidget {
       this.formBox,
       this.filled,
       this.fillColor,
+      this.hoverColor,
       this.validator,
       this.style})
       : super(key: key);
@@ -78,7 +80,7 @@ class EditTextField extends StatelessWidget {
         Container(
           child: TextFormField(
               onTap: onTap,
-              style: style ?? TextStyle(color: txtWhiteColor),
+              style: style ?? TextStyle(color: txtColor ?? txtWhiteColor),
               textAlign: textAlign ?? TextAlign.center,
               // autovalidateMode: AutovalidateMode.onUserInteraction,
               onChanged: onChanged,
@@ -99,9 +101,10 @@ class EditTextField extends StatelessWidget {
               readOnly: readOnly ?? false,
               scrollPadding: EdgeInsets.zero,
               decoration: InputDecoration(
-                fillColor: fillColor, filled: filled,
+                fillColor: fillColor, filled: filled ?? true,
                 errorStyle: TextStyle(color: blackColor),
                 errorText: errorText,
+                hoverColor: hoverColor,
                 counter: Offstage(),
                 labelStyle: TextStyle(
                     fontSize: 15,
@@ -152,7 +155,7 @@ class EditTextField extends StatelessWidget {
                         borderSide:
                             BorderSide(color: txtWhiteColor, width: 1.5)),
                 focusColor: txtWhiteColor,
-                hoverColor: txtWhiteColor,
+
                 prefixIconConstraints:
                     BoxConstraints(minWidth: 0, minHeight: 0),
                 hintText: hintText,
@@ -208,6 +211,7 @@ class DropDownBtn extends StatefulWidget {
   final String? dName;
   final dynamic listData;
   final String pageName;
+  final Color? fillColor;
   String? currentItem;
   final String? labelText;
   final double? vertical;
@@ -230,6 +234,7 @@ class DropDownBtn extends StatefulWidget {
       this.listController,
       this.pageName = '',
       this.formValidator,
+      this.fillColor,
       this.currentItem,
       this.onChanged})
       : super(key: key);
@@ -324,6 +329,7 @@ class _DropDownBtnState extends State<DropDownBtn> {
                     borderSide: BorderSide(color: Colors.grey, width: 1.0)),
                 focusColor: borderColor,
                 hoverColor: borderColor,
+                fillColor: widget.fillColor,
                 suffixIconConstraints:
                     BoxConstraints.tightFor(width: 35.0, height: 12.0))),
       ],

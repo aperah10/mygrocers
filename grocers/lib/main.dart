@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'Screen/dashBoard.dart';
 import 'sellerPart/selHomScr.dart';
+import 'sellerPart/selProdAddScr.dart';
 import 'sellerPart/selProdListScr.dart';
 
 void main() {
@@ -19,9 +21,10 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         // home: SplashScreen(),
-        // home: UserNavigationBar(currentTab: 0)
+        home: UserNavigationBar(currentTab: 0)
 
-        home: SellsHomeScr()
+        // home: SellsHomeScr()
+        // home: SelProdAddScreen(),
         // home: SelProdListScreen()
         );
   }
