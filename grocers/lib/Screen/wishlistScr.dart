@@ -137,9 +137,16 @@ class ProdLastContent extends StatelessWidget {
   final Widget? child;
   final dynamic btnOnTap;
   final String? btnName;
+  final bool? removeBtn;
 
   ProdLastContent(
-      {Key? key, this.onTap, this.src, this.child, this.btnOnTap, this.btnName})
+      {Key? key,
+      this.onTap,
+      this.src,
+      this.removeBtn,
+      this.child,
+      this.btnOnTap,
+      this.btnName})
       : super(key: key);
 
   @override
@@ -149,21 +156,24 @@ class ProdLastContent extends StatelessWidget {
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          InkWell(
-            onTap: onTap,
-            child: ImgIcon(
-              src: src ?? 'assets/icons/delete-icon.png',
-              width: 15,
-              height: 15,
-            ),
-          ),
+          Container(
+              child: removeBtn == true
+                  ? InkWell(
+                      onTap: onTap,
+                      child: ImgIcon(
+                        src: src ?? 'assets/icons/delete-icon.png',
+                        width: 15,
+                        height: 15,
+                      ),
+                    )
+                  : null),
           heightSizedBox(20.0),
           Padding(
             padding: const EdgeInsets.all(20),
             child: Btn(
               padding: EdgeInsets.all(3),
               onTap: btnOnTap,
-              btnName: 'MOVE INTO BAG',
+              btnName: btnName ?? 'MOVE INTO BAG',
               style: TextStyle(color: txtWhiteColor, fontSize: 10),
               color: offgreenColor,
             ),

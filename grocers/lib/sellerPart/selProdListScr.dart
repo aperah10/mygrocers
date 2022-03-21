@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:grocers/Screen/wishlistScr.dart';
+import 'package:grocers/common/dialogBoxS.dart';
+import 'package:grocers/common/formfield.dart';
 import 'package:grocers/scrpart/imgslider.dart';
+import 'package:grocers/sellerPart/selProdAddScr.dart';
+import 'package:grocers/utils/common.dart';
+import 'package:grocers/utils/style.dart';
 import '../Elements/baseAppbar.dart';
 
 class SelProdListScreen extends StatelessWidget {
-  const SelProdListScreen({Key? key}) : super(key: key);
+  SelProdListScreen({Key? key}) : super(key: key);
+  final TextEditingController mrpPriceController = TextEditingController();
+  final TextEditingController offerPriceController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +19,14 @@ class SelProdListScreen extends StatelessWidget {
       appBar: BaseAppBar(
         centerTitle: true,
         title: 'Seller Product List',
+      ),
+      floatingActionButton: InkWell(
+        onTap: () => navigationPush(context, SelProdAddScreen()),
+        child: ImgIcon(
+          src: 'assets/icons/add-icon.png',
+          height: 60,
+          width: 60,
+        ),
       ),
       body: Container(
         child: ListView.builder(
@@ -36,8 +51,42 @@ class SelProdListScreen extends StatelessWidget {
                   // lineRight()
                   ProdLastContent(
                     // src: 'assets/icons/delete-icon.png',
-                    onTap: () {},
-                    btnName: 'Edit',
+                    btnOnTap: () async {
+                      await showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertBox(
+                            title: 'Product Price',
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                EditTextField(
+                                  vertical: 15,
+                                  textAlign: TextAlign.left,
+                                  txtColor: txtBlackColor,
+                                  headTxt: 'MRP',
+                                  // fillColor: borderColor,
+                                  hintText: 'Enter MRP Price',
+                                  controller: mrpPriceController,
+                                ),
+                                heightSizedBox(10),
+                                EditTextField(
+                                  vertical: 15,
+                                  textAlign: TextAlign.left,
+                                  txtColor: txtBlackColor,
+                                  headTxt: 'Offer Price',
+                                  // fillColor: borderColor,
+                                  hintText: 'Enter Offer Price',
+                                  controller: offerPriceController,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    btnName: ' Edit   ',
+                    removeBtn: false,
                   ),
                 ],
               ),

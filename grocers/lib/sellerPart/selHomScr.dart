@@ -5,8 +5,8 @@ import 'package:grocers/common/button.dart';
 import 'package:grocers/utils/common.dart';
 import 'package:grocers/utils/style.dart';
 
-class SellsHomeScr extends StatelessWidget {
-  SellsHomeScr({Key? key}) : super(key: key);
+class SelHomeScreen extends StatelessWidget {
+  SelHomeScreen({Key? key}) : super(key: key);
 
   var selscaffoldKey = GlobalKey<ScaffoldState>();
   @override

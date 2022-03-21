@@ -123,12 +123,13 @@ class EditTextField extends StatelessWidget {
                           width: 1.5,
                           color: txtWhiteColor,
                         ),
-                      ),
+                        borderRadius: BorderRadius.circular(5)),
                 errorBorder: formBox == true
                     ? OutlineInputBorder(
                         borderSide: BorderSide(color: borderColor, width: 1.0),
                       )
                     : UnderlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
                         borderSide:
                             BorderSide(color: txtWhiteColor, width: 1.5)),
                 focusedBorder: formBox == true
@@ -136,6 +137,7 @@ class EditTextField extends StatelessWidget {
                         borderSide: BorderSide(color: borderColor, width: 1.0),
                       )
                     : UnderlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
                         borderSide:
                             BorderSide(color: txtWhiteColor, width: 1.5),
                       ),
@@ -144,11 +146,13 @@ class EditTextField extends StatelessWidget {
                         borderSide: BorderSide(color: borderColor, width: 1.0),
                       )
                     : UnderlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
                         borderSide:
                             BorderSide(color: txtWhiteColor, width: 1.5),
                       ),
                 border: formBox == true
                     ? OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
                         borderSide: BorderSide(color: borderColor, width: 1.0),
                       )
                     : UnderlineInputBorder(
@@ -216,6 +220,7 @@ class DropDownBtn extends StatefulWidget {
   final String? labelText;
   final double? vertical;
   final double? horizontal;
+  final bool? filled;
   TextEditingController? listController = new TextEditingController();
   final dynamic onChanged;
   // String? Function(String?)? formValidator;
@@ -236,6 +241,7 @@ class DropDownBtn extends StatefulWidget {
       this.formValidator,
       this.fillColor,
       this.currentItem,
+      this.filled,
       this.onChanged})
       : super(key: key);
 
@@ -255,7 +261,7 @@ class _DropDownBtnState extends State<DropDownBtn> {
             : SizedBox(height: 0.0),
         DropdownButtonFormField<dynamic>(
             // ! DROP DOWN MENU dropdownValue
-            dropdownColor: Colors.white,
+            // dropdownColor: Colors.white,
             // value: widget.currentItem,
             value: widget.listController!.text.isNotEmpty
                 ? widget.listController!.text
@@ -314,21 +320,27 @@ class _DropDownBtnState extends State<DropDownBtn> {
                     horizontal: widget.horizontal ?? 10.0),
                 isDense: true,
                 errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
                   borderSide: BorderSide(color: borderColor, width: 1.0),
                 ),
                 focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
                   borderSide: BorderSide(color: borderColor, width: 1.2),
                 ),
                 focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
                   borderSide: BorderSide(color: borderColor, width: 1.0),
                 ),
                 enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
                   borderSide: BorderSide(color: borderColor, width: 1.2),
                 ),
                 border: UnderlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
                     borderSide: BorderSide(color: Colors.grey, width: 1.0)),
                 focusColor: borderColor,
                 hoverColor: borderColor,
+                filled: widget.filled ?? true,
                 fillColor: widget.fillColor,
                 suffixIconConstraints:
                     BoxConstraints.tightFor(width: 35.0, height: 12.0))),

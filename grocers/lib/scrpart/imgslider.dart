@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:grocers/common/button.dart';
@@ -160,5 +162,104 @@ class ImgHorizontalList extends StatelessWidget {
             );
           }),
     );
+  }
+}
+
+// ! Upload File
+class SelUpdMultiFile extends StatefulWidget {
+  final Function()? upDFile;
+  final Function()? cleanImg;
+  final String? imgSrc;
+  final String? networkImage;
+  SelUpdMultiFile(
+      {Key? key, this.imgSrc, this.upDFile, this.cleanImg, this.networkImage})
+      : super(key: key);
+
+  @override
+  _SelUpdMultiFileState createState() => _SelUpdMultiFileState();
+}
+
+class _SelUpdMultiFileState extends State<SelUpdMultiFile> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.all(1.0),
+        child: Column(
+          children: [
+            // ! UPLOAD NEW FILE
+            Container(
+              // padding: const EdgeInsets.all(1.0),
+              // margin: EdgeInsets.all(1.0),
+              height: 60,
+              decoration: BoxDecoration(
+                image:
+                    //  widget.imgSrc != null?
+                    DecorationImage(
+                  image: FileImage(widget.imgSrc != null
+                      ? File(widget.imgSrc as String)
+                      : File('')),
+                  // fit: BoxFit.fitWidth,
+                )
+                // : null
+                ,
+                // ! Cricle Border
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: MaterialButton(
+                color: widget.imgSrc == null ? offWhiteColor : null,
+                onPressed: widget.upDFile,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: Ink(
+                  decoration: BoxDecoration(
+                    // ! Cricle Border
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Container(
+                    constraints: BoxConstraints(
+                        maxWidth: 20.0,
+                        minHeight: 45.0,
+                        maxHeight: 45.0), // min sizes for Material buttons
+                    alignment: Alignment.center,
+                    child: Center(
+                      child: Container(
+                          height: 20,
+                          decoration: BoxDecoration(
+                            border: widget.imgSrc == null
+                                ? Border.all(color: redColor)
+                                : null,
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            color: widget.imgSrc == null ? redColor : null,
+                          ),
+                          child: widget.imgSrc == null ||
+                                  widget.imgSrc.toString().isEmpty
+                              ? Center(
+                                  child: Icon(
+                                    Icons.add,
+                                    size: 16,
+                                    color: offWhiteColor,
+                                    textDirection: TextDirection.ltr,
+                                  ),
+                                )
+                              : null),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            // ! Remove Button
+            Padding(
+              padding: const EdgeInsets.only(),
+              child: Container(
+                  child: widget.imgSrc == null || widget.imgSrc!.isEmpty
+                      ? null
+                      : InkWell(
+                          onTap: widget.cleanImg,
+                          child: IconBtn(
+                              icon: Icons.cancel, size: 15, color: redColor))),
+            )
+          ],
+        ));
   }
 }

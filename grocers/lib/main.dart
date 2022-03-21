@@ -4,6 +4,7 @@ import 'Screen/dashBoard.dart';
 import 'sellerPart/selHomScr.dart';
 import 'sellerPart/selProdAddScr.dart';
 import 'sellerPart/selProdListScr.dart';
+import 'sellerPart/selTransScr.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,8 +22,11 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         // home: SplashScreen(),
-        home: UserNavigationBar(currentTab: 0)
-
+        // home: UserNavigationBar(currentTab: 0)
+        home: SellerNavigationBar(
+          currentTab: 0,
+        )
+        // home: SelTranscationScreen()
         // home: SellsHomeScr()
         // home: SelProdAddScreen(),
         // home: SelProdListScreen()
