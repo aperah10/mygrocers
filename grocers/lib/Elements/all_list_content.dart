@@ -325,39 +325,39 @@ class HomeGridProdList extends StatelessWidget {
   }
 }
 
-// ! Cart ProdList
-class CartProdVerList extends StatelessWidget {
-  dynamic plusCallBack;
-  dynamic minusCallBack;
-  dynamic price;
-  dynamic quantity;
-  dynamic fullPrice;
-  CartProdVerList(
-      {Key? key,
-      this.minusCallBack,
-      this.plusCallBack,
-      this.fullPrice,
-      this.price,
-      this.quantity})
-      : super(key: key);
+// // ! Cart ProdList
+// class CartProdVerList extends StatelessWidget {
+//   dynamic plusCallBack;
+//   dynamic minusCallBack;
+//   dynamic price;
+//   dynamic quantity;
+//   dynamic fullPrice;
+//   CartProdVerList(
+//       {Key? key,
+//       this.minusCallBack,
+//       this.plusCallBack,
+//       this.fullPrice,
+//       this.price,
+//       this.quantity})
+//       : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemBuilder: (contxt, i) {
-          return CartProdContent(
-            prodNumber: i,
-            // plusCallBack: plusCallBack,
-            // minusCallBack: minusCallBack,
-            // price: price,
-            // fullPrice: fullPrice,
-            // quantity: quantity,
-          );
-        },
-        itemCount: 3,
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       child: ListView.builder(
+//         shrinkWrap: true,
+//         itemBuilder: (contxt, i) {
+//           return CartProdContent(
+//             prodNumber: i,
+//             // plusCallBack: plusCallBack,
+//             // minusCallBack: minusCallBack,
+//             // price: price,
+//             // fullPrice: fullPrice,
+//             // quantity: quantity,
+//           );
+//         },
+//         itemCount: 3,
+//       ),
+//     );
+//   }
+// }

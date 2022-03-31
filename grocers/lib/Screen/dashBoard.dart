@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:grocers/Elements/baseAppbar.dart';
-import 'package:grocers/Screen/cartScr.dart';
-import 'package:grocers/Screen/profileScr.dart';
-import 'package:grocers/Screen/searchScr.dart';
-import 'package:grocers/Screen/wishlistScr.dart';
-import 'package:grocers/common/button.dart';
-import 'package:grocers/sellerPart/selCategoryScr.dart';
-import 'package:grocers/sellerPart/selHomScr.dart';
-import 'package:grocers/sellerPart/selOrder.dart';
-import 'package:grocers/sellerPart/selProdListScr.dart';
-import 'package:grocers/sellerPart/selTransScr.dart';
+import '../Elements/baseAppbar.dart';
+import '../Screen/authconfrim.dart';
+import '../Screen/cartScr.dart';
+import '../Screen/profileScr.dart';
+import '../Screen/searchScr.dart';
+import '../Screen/wishlistScr.dart';
+import '../common/button.dart';
+import '../sellerPart/selCategoryScr.dart';
+import '../sellerPart/selHomScr.dart';
+import '../sellerPart/selOrder.dart';
+import '../sellerPart/selOrderDetScr.dart';
+import '../sellerPart/selProdListScr.dart';
+import '../sellerPart/selTransScr.dart';
 
 import '../utils/style.dart';
 import 'home.dart';
@@ -60,9 +62,11 @@ class _UserNavigationBarState extends State<UserNavigationBar> {
           widget.currentPage = ProfileScreen();
           // widget.currentPage = SelGeneratePromoCodes(sellerId: widget.sellerId);
           break;
-        // case 5:
-        //   widget.currentPage = Profile();
-        //   break;
+        case 5:
+          widget.currentPage = AuthOptionScr(
+            seller: true,
+          );
+          break;
       }
     });
   }
@@ -141,6 +145,14 @@ class _UserNavigationBarState extends State<UserNavigationBar> {
             // ),
             label: 'Profile',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.sell_sharp,
+              size: 22,
+              color: widget.currentTab == 5 ? offgreenColor : Colors.black38,
+            ),
+            label: 'Seller',
+          ),
         ],
       ),
     );
@@ -187,7 +199,7 @@ class _SellerNavigationBarState extends State<SellerNavigationBar> {
               );
           break;
         case 3:
-          widget.currentPage = SelOrderScreen();
+          widget.currentPage = SelOrderDetailScreen();
 
           break;
         case 4:

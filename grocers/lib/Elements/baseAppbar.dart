@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocers/scrpart/imgslider.dart';
+import 'package:grocers/utils/common.dart';
 import '../utils/style.dart';
 
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -30,23 +31,12 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: bgColor ?? txtWhiteColor,
+      // backgroundColor: bgColor ?? txtWhiteColor,
       elevation: elevation,
       automaticallyImplyLeading: boolLeading ?? true,
-      // leading: leading,
-      leading: leading != null
-          ? leading
-          : boolLeading == false
-              ? null
-              : IconButton(
-                  iconSize: 28,
-                  icon: Icon(Icons.chevron_left_sharp, color: txtBlackColor),
-                  onPressed: leadingOnTap ?? () => Navigator.of(context).pop(),
-                ),
+      leading: leading,
       title: title != null
-          ? Text(title!,
-              style: TextStyle(
-                  fontFamily: montserratMedium, color: txtColor ?? orangeColor))
+          ? Text(title!, style: TextStyle(fontFamily: montserratMedium))
           : null,
       centerTitle: centerTitle ?? false,
       actions: actionList,
@@ -95,15 +85,14 @@ class SliverAppBars extends StatelessWidget {
 
       elevation: elevation,
       automaticallyImplyLeading: boolLeading ?? true,
+      // leading: leading,
       leading: leading != null
           ? leading
-          : boolLeading == false
-              ? null
-              : IconButton(
-                  iconSize: 28,
-                  icon: Icon(Icons.chevron_left_sharp, color: txtBlackColor),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
+          : IconButton(
+              iconSize: 28,
+              icon: Icon(Icons.chevron_left_sharp, color: txtBlackColor),
+              onPressed: () => navigationPop(context),
+            ),
       // title: Text(
       //   'All Category ',
       //   style: appBarTS,

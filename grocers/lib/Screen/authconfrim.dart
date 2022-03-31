@@ -6,7 +6,8 @@ import 'package:grocers/utils/style.dart';
 import '../common/button.dart';
 
 class AuthOptionScr extends StatelessWidget {
-  const AuthOptionScr({Key? key}) : super(key: key);
+  final bool? seller;
+  const AuthOptionScr({Key? key, this.seller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +32,21 @@ class AuthOptionScr extends StatelessWidget {
                   top: 30.0, left: 30.0, right: 30.0, bottom: 40),
               child: Column(
                 children: [
-                  Btn(
-                    onTap: () => navigationPush(context, LoginScr()),
-                    width: double.maxFinite,
-                    height: 40,
-                    btnName: 'LOGIN AS A CUSTOMER',
-                    color: marronColor,
+                  Container(
+                    child: seller == true
+                        ? null
+                        : Btn(
+                            onTap: () => navigationPush(context, LoginScr()),
+                            width: double.maxFinite,
+                            height: 40,
+                            btnName: 'LOGIN AS A CUSTOMER',
+                            color: marronColor,
+                          ),
                   ),
                   heightSizedBox(25.0),
                   Btn(
-                    onTap: () => navigationPush(context, LoginScr()),
+                    onTap: () =>
+                        navigationPush(context, LoginScr(seller: true)),
                     width: double.maxFinite,
                     height: 40,
                     color: blackColor,

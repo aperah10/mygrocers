@@ -10,7 +10,8 @@ import '../common/formfield.dart';
 import '../utils/common.dart';
 
 class LoginScr extends StatefulWidget {
-  const LoginScr({Key? key}) : super(key: key);
+  final bool? seller;
+  const LoginScr({Key? key, this.seller}) : super(key: key);
 
   @override
   State<LoginScr> createState() => _LoginScrState();
@@ -28,7 +29,8 @@ class _LoginScrState extends State<LoginScr> {
     }
     _formKey.currentState!.save();
     if (isvalid == true) {
-      navigationPush(context, OtpScreen(phone: mobileController.text));
+      navigationPush(context,
+          OtpScreen(seller: widget.seller, phone: mobileController.text));
     }
   }
 
@@ -111,7 +113,7 @@ class _LoginScrState extends State<LoginScr> {
                         width: double.maxFinite,
                         height: 40,
                         btnName: 'LOGIN',
-                        color:marronColor ,
+                        color: marronColor,
                       ),
                     ),
                   ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocers/utils/common.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/style.dart';
 
 class Txt extends StatelessWidget {
@@ -126,6 +127,85 @@ class IconBtn extends StatelessWidget {
   }
 }
 
+// class CartBtn extends StatefulWidget {
+//   final dynamic plusCallBack;
+//   final dynamic minusCallBack;
+//   final Color? color;
+//   const CartBtn({Key? key, this.color, this.plusCallBack, this.minusCallBack})
+//       : super(key: key);
+
+//   @override
+//   State<CartBtn> createState() => _CartBtnState();
+// }
+
+// class _CartBtnState extends State<CartBtn> {
+//   dynamic cartItem = 1;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: 25,
+//       // width: getWidth(context) / 4,
+//       alignment: Alignment.center,
+//       width: 70,
+//       decoration: BoxDecoration(
+//           border: Border.all(width: .9, color: Colors.black12),
+//           borderRadius: BorderRadius.circular(3)),
+//       child: Row(
+//         crossAxisAlignment: CrossAxisAlignment.center,
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: [
+//           Expanded(
+//             child: Container(
+//               // alignment: Alignment.topLeft,
+//               child: IconButton(
+//                 padding: const EdgeInsets.all(0.0),
+//                 icon: Icon(Icons.remove),
+//                 iconSize: 18,
+//                 color: widget.color,
+//                 onPressed: cartItem > 1
+//                     ? () {
+//                         setState(() {
+//                           cartItem -= 1;
+//                           widget.minusCallBack(cartItem);
+//                         });
+//                       }
+//                     : null,
+//               ),
+//             ),
+//           ),
+//           Expanded(
+//             child: Container(
+//               alignment: Alignment.center,
+//               child: Txt(
+//                 t: ' $cartItem ',
+//                 fontSize: 15,
+//               ),
+//             ),
+//           ),
+//           Expanded(
+//             child: Container(
+//               // alignment: Alignment.topRight,
+//               child: IconButton(
+//                 padding: const EdgeInsets.all(0.0),
+//                 icon: Icon(Icons.add),
+//                 iconSize: 18,
+//                 color: widget.color,
+//                 onPressed: () {
+//                   setState(() {
+//                     cartItem += 1;
+//                     widget.plusCallBack(cartItem);
+//                   });
+//                 },
+//               ),
+//             ),
+//           )
+//         ],
+//       ),
+//     );
+//   }
+// }
+
 class CartBtn extends StatefulWidget {
   final dynamic plusCallBack;
   final dynamic minusCallBack;
@@ -176,9 +256,8 @@ class _CartBtnState extends State<CartBtn> {
           Expanded(
             child: Container(
               alignment: Alignment.center,
-              child: Txt(
-                t: ' $cartItem ',
-                fontSize: 15,
+              child: Text(
+                ' $cartItem ',
               ),
             ),
           ),

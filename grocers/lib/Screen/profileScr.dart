@@ -11,7 +11,13 @@ class ProfileScreen extends StatelessWidget {
       appBar: BaseAppBar(
         title: 'Profile',
         centerTitle: true,
+        // boolLeading: false,
       ),
+
+      // appBar: AppBar(
+      //   title: Text('Profile'),
+      //   centerTitle: true,
+      // ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: ListView(

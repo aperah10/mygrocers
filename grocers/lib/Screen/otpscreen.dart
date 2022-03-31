@@ -7,8 +7,9 @@ import '../utils/style.dart';
 import 'authconfrim.dart';
 
 class OtpScreen extends StatefulWidget {
+  final bool? seller;
   final dynamic phone;
-  const OtpScreen({Key? key, this.phone}) : super(key: key);
+  const OtpScreen({Key? key, this.phone, this.seller}) : super(key: key);
 
   @override
   _OtpScreenState createState() => _OtpScreenState();
@@ -28,7 +29,11 @@ class _OtpScreenState extends State<OtpScreen> {
     print('Otp value $otpData');
     if (otpData!.length == 4) {
       print('otp mobile Number ${widget.phone}');
-      navigationRemoveUntil(context, UserNavigationBar(currentTab: 0));
+      if (widget.seller == true) {
+        navigationRemoveUntil(context, SellerNavigationBar(currentTab: 0));
+      } else {
+        navigationRemoveUntil(context, UserNavigationBar(currentTab: 0));
+      }
     } else {
       snackBar(context, 'Please fill otp first');
     }

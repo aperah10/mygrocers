@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:grocers/Elements/baseAppbar.dart';
-import 'package:grocers/Screen/orderCompleteScr.dart';
-import 'package:grocers/common/button.dart';
-import 'package:grocers/utils/common.dart';
-import 'package:grocers/utils/style.dart';
+import '../Elements/baseAppbar.dart';
+import '../Screen/orderCompleteScr.dart';
+import '../common/button.dart';
+import '../common/cart_order_item.dart';
+import '../utils/common.dart';
+import '../utils/style.dart';
 
 import '../scrpart/orderDetbody.dart';
 import 'cartScr.dart';
@@ -20,7 +21,7 @@ class OrderDeatilsScreen extends StatelessWidget {
       ),
       body: ListView(
         shrinkWrap: true,
-        children: [OrderDetailTop(), OrderDetProd(), CartPriceList()],
+        children: [OrderDetailTop(), OrderDetProd(), PriceList()],
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(20),
