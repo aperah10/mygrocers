@@ -18,6 +18,9 @@ class RegisterScr extends StatefulWidget {
 
 class _RegisterScrState extends State<RegisterScr> {
   final mobileController = TextEditingController();
+  final fullnameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   // ! rister method
@@ -73,10 +76,6 @@ class _RegisterScrState extends State<RegisterScr> {
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
-            // borderRadius: BorderRadius.only(
-            //   bottomLeft: Radius.circular(25),
-            //   bottomRight: Radius.circular(25),
-            // ),
             borderRadius: BorderRadius.circular(6),
             image: DecorationImage(
                 image: AssetImage('assets/images/bg02.png'), fit: BoxFit.fill),
@@ -94,16 +93,38 @@ class _RegisterScrState extends State<RegisterScr> {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    Txt(
-                      t: 'Enter Mobile Number',
-                      fontSize: 12,
-                      color: txtWhiteColor,
+                    // Txt(
+                    //   t: 'Enter Mobile Number',
+                    //   fontSize: 12,
+                    //   color: txtWhiteColor,
+                    // ),
+                    EditTextField(
+                      headTxt: 'fullname',
+                      controller: fullnameController,
+                      keyboardType: TextInputType.name,
+                      maxLength: 10,
+                      validator: validateField,
                     ),
                     EditTextField(
+                      headTxt: 'Mobile',
                       controller: mobileController,
                       keyboardType: TextInputType.phone,
                       maxLength: 10,
                       validator: validateMobile,
+                    ),
+                    EditTextField(
+                      headTxt: 'Email',
+                      controller: emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      maxLength: 10,
+                      validator: validateEmail,
+                    ),
+                    EditTextField(
+                      headTxt: 'Password',
+                      controller: passwordController,
+                      keyboardType: TextInputType.visiblePassword,
+                      // maxLength: 10,
+                      validator: validateField,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(20.0),

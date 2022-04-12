@@ -1,3 +1,10 @@
+validateField(String value) {
+  if (value.isEmpty)
+    return 'Field is Required.';
+  else
+    return null;
+}
+
 validateMobile(String value) {
   if (value.isEmpty)
     return 'Mobile Number is Required.';
@@ -5,6 +12,15 @@ validateMobile(String value) {
     return 'Mobile Number required at least 10 numbers';
   else if (value.length > 11)
     return 'Mobile Number required 10 numbers';
+  else
+    return null;
+}
+
+validateEmail(String value) {
+  if (value.isEmpty)
+    return 'Email  is Required.';
+  else if (!value.contains('@'))
+    return 'Valid Email ';
   else
     return null;
 }

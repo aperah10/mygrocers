@@ -81,7 +81,7 @@ class EditTextField extends StatelessWidget {
           child: TextFormField(
               onTap: onTap,
               style: style ?? TextStyle(color: txtColor ?? txtWhiteColor),
-              textAlign: textAlign ?? TextAlign.center,
+              textAlign: textAlign ?? TextAlign.start,
               // autovalidateMode: AutovalidateMode.onUserInteraction,
               onChanged: onChanged,
               inputFormatters: inputFormatters,
